@@ -8,7 +8,14 @@ const SignOutComponent = () => {
     const session = await getSession();
     console.log(session);
   })();
-  return <button onClick={() => signOut()}>signOut</button>;
+  return (
+    <button
+      className="bg-blue-500 text-white p-2 rounded"
+      onClick={() => signOut()}
+    >
+      Sign Out
+    </button>
+  );
 };
 
 export default SignOutComponent;

@@ -65,8 +65,6 @@ const handler = NextAuth({
 
     async jwt({ token, user }) {
       if (user) {
-        console.log(token);
-
         return {
           ...token,
           id: user.id,
@@ -88,9 +86,6 @@ const handler = NextAuth({
         },
       };
     },
-  },
-  pages: {
-    signIn: "/login",
   },
 });
 
