@@ -32,7 +32,7 @@ const SignInComponent = () => {
               redirect: false,
             });
             if (res?.ok) {
-              window.location.href = "/";
+              window.location.href = "/admin/dashboard";
             }
             if (res?.error) {
               setError(res.error);
