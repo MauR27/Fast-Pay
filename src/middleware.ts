@@ -17,6 +17,12 @@ const handler = async (req: NextRequest) => {
     ) {
       return NextResponse.redirect(new URL("/", req.url));
     }
+    if (
+      req.nextUrl.pathname === "/admin/:path*" &&
+      session.email !== process.env.ADMIN_ROLE
+    ) {
+      return NextResponse.redirect(new URL("/", req.url));
+    }
 
     return NextResponse.next();
   } catch (error) {
@@ -26,5 +32,5 @@ const handler = async (req: NextRequest) => {
 export default handler;
 
 export const config = {
-  matcher: ["/signup"],
+  matcher: ["/signup", "/admin/:path*"],
 };
