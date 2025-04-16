@@ -1,15 +1,21 @@
 import mongoose from "mongoose";
 
-type ProductsOrderedType = {
+export type ProductsOrderedType = {
   product_id: number;
   quantity: number;
+  name: string;
+  price: number;
+  disponibility: string;
+  category: string;
+  _id: string;
 };
 
-type TablesSchemaType = {
+export type TablesSchemaType = {
   name: string;
   id: string;
   qr_code: string;
-  orders?: ProductsOrderedType[];
+  orders: ProductsOrderedType[];
+
   total: number;
   paid: boolean;
   createdAt: Date;
@@ -23,8 +29,15 @@ const tableSchema = new mongoose.Schema<TablesSchemaType>(
     qr_code: { type: String, required: true },
     orders: [
       {
-        product_id: { type: Number, required: true },
-        quantity: { type: Number, required: true },
+        product_id: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Product",
+        },
+        quantity: { type: Number },
+        name: { type: String },
+        price: { type: Number },
+        category: { type: String },
+        disponibility: { type: String },
       },
     ],
     total: { type: Number, default: 0 },

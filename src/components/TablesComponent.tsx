@@ -1,10 +1,6 @@
 "use client";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import ProductsComponent from "./ProductsComponent";
-
-// type ProductSelected = {
-//   products_selected: string;
-// };
 
 type ProductsOrderedType = {
   product_id: number;
@@ -18,12 +14,9 @@ type TablesType = {
   orders?: ProductsOrderedType[];
   total: number;
   paid: boolean;
+  _id: string;
 };
 const TablesComponent = () => {
-  // const [tableOrders, setTableOrders] = useState<{ [key: number]: string[] }>(
-  //   {}
-  // );
-  const [selectedTableId, setSelectedTableId] = useState<number | null>(null);
   const [tables, setTables] = useState<TablesType[]>([]);
 
   useEffect(() => {
@@ -55,19 +48,11 @@ const TablesComponent = () => {
       <div className="flex flex-wrap">
         {tables.map((table) => (
           <div key={table.id} className="m-2">
-            <button
-              className="bg-amber-100 text-black rounded-md h-40 w-40 shadow-md hover:bg-amber-200 transition duration-300 ease-in-out cursor-pointer"
-              onClick={() =>
-                setSelectedTableId((prev) =>
-                  prev === table.id ? null : table.id
-                )
-              }
-            >
-              {table.name}
-            </button>
-            {selectedTableId === table.id && (
-              <ProductsComponent table_id={table.id} />
-            )}
+            <Link href={`/admin/dashboard/${table._id}`}>
+              <button className="bg-amber-100 text-black rounded-md h-40 w-40 shadow-md hover:bg-amber-200 transition duration-300 ease-in-out cursor-pointer">
+                {table.name}
+              </button>
+            </Link>
 
             {/* {tableOrders[table.id] && (
               <div className="mt-2 p-2 bg-white rounded shadow-md">
